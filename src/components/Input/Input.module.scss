@@ -7,5 +7,9 @@
   padding: 10px 20px;
   &:focus {
     outline: 2px solid #1a95f0;
-  }
+  }  
+}
+
+.input-erro {
+  outline: 2px solid red !important;
 }
