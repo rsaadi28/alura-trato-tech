@@ -33,9 +33,12 @@ const itensSlice = createSlice({
     deletarItem: (state, { payload }) => {
       const index = state.findIndex(item => item.id === payload);
       state.splice(index, 1);
+    },
+    adicionarItens: (state, {payload}) => {
+      state.push(...payload);
     }
   },
-/*   extraReducers: builder => {
+  extraReducers: builder => {
     builder.addCase(
       buscarItens.fulfilled,
       (state, { payload }) => {
@@ -73,9 +76,9 @@ const itensSlice = createSlice({
           });
         }
       )
-  } */
+  }
 });
 
-export const { mudarFavorito, cadastrarItem, mudarItem, deletarItem } = itensSlice.actions;
+export const { mudarFavorito, cadastrarItem, mudarItem, deletarItem, adicionarItens } = itensSlice.actions;
 
 export default itensSlice.reducer;
