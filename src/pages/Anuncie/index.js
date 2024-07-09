@@ -6,6 +6,8 @@ import { useForm } from 'react-hook-form';
 import { cadastrarItem } from 'store/reducers/itens';
 import { useParams } from 'react-router-dom';
 import Input from 'components/Input';
+import { useEffect } from 'react';
+import { carregarCategorias, carregarUmaCategoria } from 'store/reducers/categorias';
 
 export default function Anuncie() {
   const dispatch = useDispatch();
@@ -17,12 +19,20 @@ export default function Anuncie() {
     }
   });
 
-  const {errors} = formState;
-  console.log(errors);
+  const { errors } = formState;
 
   function cadastrar(data) {
     dispatch(cadastrarItem(data));
   }
+
+  useEffect(() => { 
+    dispatch(nomeCategoria
+      ? carregarUmaCategoria(nomeCategoria)
+      : carregarCategorias
+    );
+  }
+    , [dispatch, nomeCategoria])
+
   return (
     <div className={styles.container}>
       <Header
@@ -30,8 +40,8 @@ export default function Anuncie() {
         descricao='Anuncie seu produto no melhor site do Brasil!'
       />
       <form className={styles.formulario} onSubmit={handleSubmit(cadastrar)}>
-      <Input {...register('titulo', { required: 'O campo titulo é obrigatório' })} erro={errors.titulo} placeholder='Nome do produto' alt='nome do produto' />
-      {errors.titulo && <span className={styles['mensagem-erro']}> {errors.titulo.message} </span>}
+        <Input {...register('titulo', { required: 'O campo titulo é obrigatório' })} erro={errors.titulo} placeholder='Nome do produto' alt='nome do produto' />
+        {errors.titulo && <span className={styles['mensagem-erro']}> {errors.titulo.message} </span>}
         <Input {...register('descricao', { required: 'O campo descricao é obrigatório' })} erro={errors.descricao} placeholder='Descrição do produto' alt='descrição do produto' />
         {errors.descricao && <span className={styles['mensagem-erro']}> {errors.descricao.message} </span>}
         <Input {...register('foto', { required: 'O campo foto é obrigatório' })} erro={errors.foto} placeholder='URL da imagem do produto' alt='URL da imagem do produto' />

@@ -23,6 +23,7 @@ const itensSlice = createSlice({
       })
     },
     cadastrarItem: (state, { payload }) => {
+      console.log('payload:', payload)
       state.push({ ...payload, id: uuid() });
     },
     mudarItem: (state, { payload }) => {
@@ -34,7 +35,7 @@ const itensSlice = createSlice({
       state.splice(index, 1);
     }
   },
-  extraReducers: builder => {
+/*   extraReducers: builder => {
     builder.addCase(
       buscarItens.fulfilled,
       (state, { payload }) => {
@@ -72,7 +73,7 @@ const itensSlice = createSlice({
           });
         }
       )
-  }
+  } */
 });
 
 export const { mudarFavorito, cadastrarItem, mudarItem, deletarItem } = itensSlice.actions;

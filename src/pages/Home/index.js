@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from 'components/Button';
 import { useEffect } from 'react';
-import {  buscarCategorias } from 'store/reducers/categorias';
+import {  carregarCategorias } from 'store/reducers/categorias';
 import {  buscarItens } from 'store/reducers/itens';
 
 export default function Home() {
@@ -16,7 +16,7 @@ export default function Home() {
 
 
   useEffect(() => {
-    dispatch(buscarCategorias());
+    dispatch(carregarCategorias());
     dispatch(buscarItens());
   }, [dispatch]);
 
