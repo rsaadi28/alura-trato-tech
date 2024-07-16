@@ -1,5 +1,4 @@
 import { createStandaloneToast } from "@chakra-ui/toast";
-import categoriasService from "services/categorias";
 
 const { toast } = createStandaloneToast();
 
